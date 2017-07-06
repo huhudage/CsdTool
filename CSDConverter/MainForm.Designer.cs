@@ -1,6 +1,6 @@
-﻿namespace CSDConverter
+﻿namespace CsdMergeTool
 {
-    partial class CSDConverter
+    partial class MainForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -30,11 +30,12 @@
         {
             this.srcPathLabel = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.srcPathInput = new System.Windows.Forms.TextBox();
+            this.srcBrowserBtn = new System.Windows.Forms.Button();
             this.dstPathLabel = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.dstPathInput = new System.Windows.Forms.TextBox();
+            this.dstBrowserBtn = new System.Windows.Forms.Button();
+            this.startBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // srcPathLabel
@@ -44,23 +45,25 @@
             this.srcPathLabel.Name = "srcPathLabel";
             this.srcPathLabel.Size = new System.Drawing.Size(71, 12);
             this.srcPathLabel.TabIndex = 0;
-            this.srcPathLabel.Text = "源CSD路径：";
+            this.srcPathLabel.Text = "源Csd路径：";
             // 
-            // textBox1
+            // srcPathInput
             // 
-            this.textBox1.Location = new System.Drawing.Point(78, 10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(394, 21);
-            this.textBox1.TabIndex = 2;
+            this.srcPathInput.Location = new System.Drawing.Point(78, 10);
+            this.srcPathInput.Name = "srcPathInput";
+            this.srcPathInput.Size = new System.Drawing.Size(394, 21);
+            this.srcPathInput.TabIndex = 2;
+            this.srcPathInput.TextChanged += new System.EventHandler(this.srcPathInput_TextChanged);
             // 
-            // button1
+            // srcBrowserBtn
             // 
-            this.button1.Location = new System.Drawing.Point(478, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(19, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = ">";
-            this.button1.UseVisualStyleBackColor = true;
+            this.srcBrowserBtn.Location = new System.Drawing.Point(478, 8);
+            this.srcBrowserBtn.Name = "srcBrowserBtn";
+            this.srcBrowserBtn.Size = new System.Drawing.Size(19, 23);
+            this.srcBrowserBtn.TabIndex = 3;
+            this.srcBrowserBtn.Text = ">";
+            this.srcBrowserBtn.UseVisualStyleBackColor = true;
+            this.srcBrowserBtn.Click += new System.EventHandler(this.srcBrowserBtn_Click);
             // 
             // dstPathLabel
             // 
@@ -71,35 +74,48 @@
             this.dstPathLabel.TabIndex = 4;
             this.dstPathLabel.Text = "输出路径：";
             // 
-            // textBox2
+            // dstPathInput
             // 
-            this.textBox2.Location = new System.Drawing.Point(78, 42);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(394, 21);
-            this.textBox2.TabIndex = 5;
+            this.dstPathInput.Location = new System.Drawing.Point(78, 42);
+            this.dstPathInput.Name = "dstPathInput";
+            this.dstPathInput.Size = new System.Drawing.Size(394, 21);
+            this.dstPathInput.TabIndex = 5;
+            this.dstPathInput.TextChanged += new System.EventHandler(this.dstPathInput_TextChanged);
             // 
-            // button2
+            // dstBrowserBtn
             // 
-            this.button2.Location = new System.Drawing.Point(478, 40);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(19, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = ">";
-            this.button2.UseVisualStyleBackColor = true;
+            this.dstBrowserBtn.Location = new System.Drawing.Point(478, 40);
+            this.dstBrowserBtn.Name = "dstBrowserBtn";
+            this.dstBrowserBtn.Size = new System.Drawing.Size(19, 23);
+            this.dstBrowserBtn.TabIndex = 6;
+            this.dstBrowserBtn.Text = ">";
+            this.dstBrowserBtn.UseVisualStyleBackColor = true;
+            this.dstBrowserBtn.Click += new System.EventHandler(this.dstBrowserBtn_Click);
             // 
-            // CSDConverter
+            // startBtn
+            // 
+            this.startBtn.Location = new System.Drawing.Point(215, 212);
+            this.startBtn.Name = "startBtn";
+            this.startBtn.Size = new System.Drawing.Size(75, 23);
+            this.startBtn.TabIndex = 7;
+            this.startBtn.Text = "开始";
+            this.startBtn.UseVisualStyleBackColor = true;
+            this.startBtn.Click += new System.EventHandler(this.startBtn_Click);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(509, 269);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.startBtn);
+            this.Controls.Add(this.dstBrowserBtn);
+            this.Controls.Add(this.dstPathInput);
             this.Controls.Add(this.dstPathLabel);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.srcBrowserBtn);
+            this.Controls.Add(this.srcPathInput);
             this.Controls.Add(this.srcPathLabel);
-            this.Name = "CSDConverter";
-            this.Text = "Form1";
+            this.Name = "MainForm";
+            this.Text = "Csd合并工具";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -109,11 +125,12 @@
 
         private System.Windows.Forms.Label srcPathLabel;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox srcPathInput;
+        private System.Windows.Forms.Button srcBrowserBtn;
         private System.Windows.Forms.Label dstPathLabel;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox dstPathInput;
+        private System.Windows.Forms.Button dstBrowserBtn;
+        private System.Windows.Forms.Button startBtn;
     }
 }
 
