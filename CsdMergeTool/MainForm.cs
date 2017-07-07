@@ -34,6 +34,7 @@ namespace CsdMergeTool
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "csd文件|*.csd";
             dialog.FileName = srcPathInput.Text;
+            dialog.InitialDirectory = Path.GetDirectoryName(srcPathInput.Text);
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
                 srcPathInput.Text = Path.GetFullPath(dialog.FileName);
@@ -46,6 +47,7 @@ namespace CsdMergeTool
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "csd files (*.csd)|*.csd";
             dialog.FileName = dstPathInput.Text;
+            dialog.InitialDirectory = Path.GetDirectoryName(dstPathInput.Text);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 dstPathInput.Text = Path.GetFullPath(dialog.FileName);
