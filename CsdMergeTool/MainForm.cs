@@ -29,6 +29,8 @@ namespace CsdMergeTool
 
             float defaultScale = 1.0f;
             scaleInput.Text = defaultScale.ToString("0.0");
+
+            imagePathInput.Text = "animation";
         }
 
         // 选择源CSD路径
@@ -78,6 +80,12 @@ namespace CsdMergeTool
                 return;
             }
 
+            if (String.IsNullOrEmpty(imagePathInput.Text))
+            {
+                MessageBox.Show("请设置图片路径");
+                return;
+            }
+
             float scale = 1.0f;
             try
             {
@@ -89,7 +97,7 @@ namespace CsdMergeTool
                 return;
             }
 
-            CsdMerge csdMerge = new CsdMerge(srcPathInput.Text, dstPathInput.Text, scale);
+            CsdMerge csdMerge = new CsdMerge(srcPathInput.Text, dstPathInput.Text, imagePathInput.Text, scale);
             csdMerge.Merge();
         }
 

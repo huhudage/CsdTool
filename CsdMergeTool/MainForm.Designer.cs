@@ -37,6 +37,8 @@
             this.startBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.scaleInput = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.imagePathInput = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // srcPathLabel
@@ -114,7 +116,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 92);
+            this.label1.Location = new System.Drawing.Point(13, 117);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 8;
@@ -122,17 +124,36 @@
             // 
             // scaleInput
             // 
-            this.scaleInput.Location = new System.Drawing.Point(78, 89);
+            this.scaleInput.Location = new System.Drawing.Point(78, 113);
             this.scaleInput.MaxLength = 5;
             this.scaleInput.Name = "scaleInput";
             this.scaleInput.Size = new System.Drawing.Size(81, 21);
             this.scaleInput.TabIndex = 9;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 85);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 12);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "图片分类：";
+            // 
+            // imagePathInput
+            // 
+            this.imagePathInput.Location = new System.Drawing.Point(78, 79);
+            this.imagePathInput.MaxLength = 5;
+            this.imagePathInput.Name = "imagePathInput";
+            this.imagePathInput.Size = new System.Drawing.Size(386, 21);
+            this.imagePathInput.TabIndex = 11;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(501, 211);
+            this.Controls.Add(this.imagePathInput);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.scaleInput);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.startBtn);
@@ -160,6 +181,8 @@
         private System.Windows.Forms.Button startBtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox scaleInput;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox imagePathInput;
     }
 }
 

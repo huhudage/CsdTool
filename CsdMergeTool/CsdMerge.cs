@@ -33,12 +33,14 @@ namespace CsdMergeTool
         private String srcPath;
         private String outputPath;
         private String outputFileName;
+        private String dstImagePath;
         private float  globalScale;
 
-        public CsdMerge(String srcPath, String outputPath, float scale)
+        public CsdMerge(String srcPath, String outputPath, String dstImagePath, float scale)
         {
             this.srcPath = srcPath;
             this.outputPath = outputPath;
+            this.dstImagePath = dstImagePath;
             this.globalScale = scale;
 
             outputFileName = Path.GetFileNameWithoutExtension(outputPath);
@@ -157,7 +159,7 @@ namespace CsdMergeTool
 
             // 获取子 csd 的图片名称
             String imageName = Path.GetFileName(GetAttribute(spriteNode, "fileName"));
-            String imagePath = String.Format("images/{0}/{1}", outputFileName, imageName);
+            String imagePath = String.Format("images/{0}/{1}/{2}", dstImagePath, outputFileName, imageName);
 
             // 获取子 csd 的相对位置
             String posX = GetChildAttribute(layerNode, "Position", "X");
