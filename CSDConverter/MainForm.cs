@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace CsdMergeTool
 {
@@ -30,22 +31,24 @@ namespace CsdMergeTool
         // 选择源CSD路径
         private void srcBrowserBtn_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.Description = "请选择文件夹";
-            if (dialog.ShowDialog() == DialogResult.OK || dialog.ShowDialog() == DialogResult.Yes)
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "csd文件|*.csd";
+            dialog.FileName = srcPathInput.Text;
+            if (dialog.ShowDialog(this) == DialogResult.OK)
             {
-                srcPathInput.Text = dialog.SelectedPath;
+                srcPathInput.Text = Path.GetFullPath(dialog.FileName);
             }
         }
 
         // 选择输出路径
         private void dstBrowserBtn_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.Description = "请选择文件夹";
-            if (dialog.ShowDialog() == DialogResult.OK || dialog.ShowDialog() == DialogResult.Yes)
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "csd files (*.csd)|*.csd";
+            dialog.FileName = dstPathInput.Text;
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                dstPathInput.Text = dialog.SelectedPath;
+                dstPathInput.Text = Path.GetFullPath(dialog.FileName);
             }
         }
 

@@ -49,15 +49,18 @@
             // 
             // srcPathInput
             // 
+            this.srcPathInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.srcPathInput.Location = new System.Drawing.Point(78, 10);
             this.srcPathInput.Name = "srcPathInput";
-            this.srcPathInput.Size = new System.Drawing.Size(394, 21);
+            this.srcPathInput.Size = new System.Drawing.Size(386, 21);
             this.srcPathInput.TabIndex = 2;
             this.srcPathInput.TextChanged += new System.EventHandler(this.srcPathInput_TextChanged);
             // 
             // srcBrowserBtn
             // 
-            this.srcBrowserBtn.Location = new System.Drawing.Point(478, 8);
+            this.srcBrowserBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.srcBrowserBtn.Location = new System.Drawing.Point(470, 8);
             this.srcBrowserBtn.Name = "srcBrowserBtn";
             this.srcBrowserBtn.Size = new System.Drawing.Size(19, 23);
             this.srcBrowserBtn.TabIndex = 3;
@@ -76,15 +79,18 @@
             // 
             // dstPathInput
             // 
+            this.dstPathInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dstPathInput.Location = new System.Drawing.Point(78, 42);
             this.dstPathInput.Name = "dstPathInput";
-            this.dstPathInput.Size = new System.Drawing.Size(394, 21);
+            this.dstPathInput.Size = new System.Drawing.Size(386, 21);
             this.dstPathInput.TabIndex = 5;
             this.dstPathInput.TextChanged += new System.EventHandler(this.dstPathInput_TextChanged);
             // 
             // dstBrowserBtn
             // 
-            this.dstBrowserBtn.Location = new System.Drawing.Point(478, 40);
+            this.dstBrowserBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dstBrowserBtn.Location = new System.Drawing.Point(470, 40);
             this.dstBrowserBtn.Name = "dstBrowserBtn";
             this.dstBrowserBtn.Size = new System.Drawing.Size(19, 23);
             this.dstBrowserBtn.TabIndex = 6;
@@ -94,9 +100,11 @@
             // 
             // startBtn
             // 
-            this.startBtn.Location = new System.Drawing.Point(215, 212);
+            this.startBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.startBtn.Location = new System.Drawing.Point(217, 146);
             this.startBtn.Name = "startBtn";
-            this.startBtn.Size = new System.Drawing.Size(75, 23);
+            this.startBtn.Size = new System.Drawing.Size(99, 36);
             this.startBtn.TabIndex = 7;
             this.startBtn.Text = "开始";
             this.startBtn.UseVisualStyleBackColor = true;
@@ -106,7 +114,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 269);
+            this.ClientSize = new System.Drawing.Size(501, 211);
             this.Controls.Add(this.startBtn);
             this.Controls.Add(this.dstBrowserBtn);
             this.Controls.Add(this.dstPathInput);
