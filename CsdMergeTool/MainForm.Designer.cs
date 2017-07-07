@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.srcPathLabel = new System.Windows.Forms.Label();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.srcPathInput = new System.Windows.Forms.TextBox();
             this.srcBrowserBtn = new System.Windows.Forms.Button();
             this.dstPathLabel = new System.Windows.Forms.Label();
             this.dstPathInput = new System.Windows.Forms.TextBox();
             this.dstBrowserBtn = new System.Windows.Forms.Button();
             this.startBtn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.scaleInput = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // srcPathLabel
@@ -43,9 +44,9 @@
             this.srcPathLabel.AutoSize = true;
             this.srcPathLabel.Location = new System.Drawing.Point(13, 13);
             this.srcPathLabel.Name = "srcPathLabel";
-            this.srcPathLabel.Size = new System.Drawing.Size(71, 12);
+            this.srcPathLabel.Size = new System.Drawing.Size(65, 12);
             this.srcPathLabel.TabIndex = 0;
-            this.srcPathLabel.Text = "源Csd路径：";
+            this.srcPathLabel.Text = "csd 路径：";
             // 
             // srcPathInput
             // 
@@ -102,19 +103,38 @@
             // 
             this.startBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.startBtn.Location = new System.Drawing.Point(217, 146);
+            this.startBtn.Location = new System.Drawing.Point(202, 144);
             this.startBtn.Name = "startBtn";
             this.startBtn.Size = new System.Drawing.Size(99, 36);
             this.startBtn.TabIndex = 7;
-            this.startBtn.Text = "开始";
+            this.startBtn.Text = "合并";
             this.startBtn.UseVisualStyleBackColor = true;
             this.startBtn.Click += new System.EventHandler(this.startBtn_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 92);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "统一缩放：";
+            // 
+            // scaleInput
+            // 
+            this.scaleInput.Location = new System.Drawing.Point(78, 89);
+            this.scaleInput.MaxLength = 5;
+            this.scaleInput.Name = "scaleInput";
+            this.scaleInput.Size = new System.Drawing.Size(81, 21);
+            this.scaleInput.TabIndex = 9;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(501, 211);
+            this.Controls.Add(this.scaleInput);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.startBtn);
             this.Controls.Add(this.dstBrowserBtn);
             this.Controls.Add(this.dstPathInput);
@@ -132,13 +152,14 @@
         #endregion
 
         private System.Windows.Forms.Label srcPathLabel;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.TextBox srcPathInput;
         private System.Windows.Forms.Button srcBrowserBtn;
         private System.Windows.Forms.Label dstPathLabel;
         private System.Windows.Forms.TextBox dstPathInput;
         private System.Windows.Forms.Button dstBrowserBtn;
         private System.Windows.Forms.Button startBtn;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox scaleInput;
     }
 }
 

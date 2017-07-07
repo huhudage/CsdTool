@@ -26,6 +26,9 @@ namespace CsdMergeTool
         {
             srcPathInput.Text = LocalConfig.GetInstance().Get<String>("srcPath");
             dstPathInput.Text = LocalConfig.GetInstance().Get<String>("dstPath");
+
+            float defaultScale = 1.0f;
+            scaleInput.Text = defaultScale.ToString("0.0");
         }
 
         // 选择源CSD路径
@@ -34,7 +37,10 @@ namespace CsdMergeTool
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "csd文件|*.csd";
             dialog.FileName = srcPathInput.Text;
-            dialog.InitialDirectory = Path.GetDirectoryName(srcPathInput.Text);
+
+            if (!String.IsNullOrEmpty(srcPathInput.Text))
+                dialog.InitialDirectory = Path.GetDirectoryName(srcPathInput.Text);
+
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
                 srcPathInput.Text = Path.GetFullPath(dialog.FileName);
@@ -47,7 +53,10 @@ namespace CsdMergeTool
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "csd files (*.csd)|*.csd";
             dialog.FileName = dstPathInput.Text;
-            dialog.InitialDirectory = Path.GetDirectoryName(dstPathInput.Text);
+
+            if (!String.IsNullOrEmpty(dstPathInput.Text))
+                dialog.InitialDirectory = Path.GetDirectoryName(dstPathInput.Text);
+
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 dstPathInput.Text = Path.GetFullPath(dialog.FileName);
@@ -69,7 +78,18 @@ namespace CsdMergeTool
                 return;
             }
 
-            CsdMerge csdMerge = new CsdMerge(srcPathInput.Text, dstPathInput.Text);
+            float scale = 1.0f;
+            try
+            {
+                scale = Convert.ToSingle(scaleInput.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("请输入合法的缩放值");
+                return;
+            }
+
+            CsdMerge csdMerge = new CsdMerge(srcPathInput.Text, dstPathInput.Text, scale);
             csdMerge.Merge();
         }
 

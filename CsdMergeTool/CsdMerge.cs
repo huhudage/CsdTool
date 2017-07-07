@@ -18,18 +18,28 @@ namespace CsdMergeTool
         public XmlNode positionFrameNode;
     }
 
+    /// <summary>
+    /// CsdMerge 类，提供 csd 合并、统一缩放等功能支持
+    /// 原始需求参见文档：http://10.2.48.228/pages/viewpage.action?pageId=511481038
+    /// </summary>
     class CsdMerge
     {
+        private const String contentPath = "GameProjectFile/Content/Content";
+        private const String bodyRootPath = contentPath + "/ObjectData";
+        private const String animationRootPath = contentPath + "/Animation";
+
         private Dictionary<String, List<ActionInfo>> fileName2ActionInfos = new Dictionary<string, List<ActionInfo>>();
 
         private String srcPath;
         private String outputPath;
         private String outputFileName;
+        private float  globalScale;
 
-        public CsdMerge(String srcPath, String outputPath)
+        public CsdMerge(String srcPath, String outputPath, float scale)
         {
             this.srcPath = srcPath;
             this.outputPath = outputPath;
+            this.globalScale = scale;
 
             outputFileName = Path.GetFileNameWithoutExtension(outputPath);
         }
@@ -48,10 +58,6 @@ namespace CsdMergeTool
             XmlDocument mainCsd = new XmlDocument();
             mainCsd.Load(srcPath);
 
-            // 更新 csd 名称
-            XmlNode node = mainCsd.SelectSingleNode("GameProjectFile/Content/Content/ObjectData");
-            SetAttribute(node, "Name", outputFileName);
-
             // 解析主 csd 文件
             ParseMainCsd(mainCsd);
 
@@ -61,6 +67,21 @@ namespace CsdMergeTool
             {
                 MergeSubCsd(mainCsd, file);
             }
+
+            // 更新 csd 名称
+            XmlNode node = mainCsd.SelectSingleNode("GameProjectFile/Content/Content/ObjectData");
+            SetAttribute(node, "Name", outputFileName);
+
+            // 如果是冈布奥 csd，需要将初始位置强制设置成 (-200, 127)
+            if (outputFileName.StartsWith("slime_") || outputFileName.StartsWith("costume_slime_"))
+            {
+                SetChildAttribute(node, "Position", "X", "-200");
+                SetChildAttribute(node, "Position", "Y", "127");
+            }
+
+            // 处理统一缩放
+            if (globalScale != 1.0f)
+                ApplyGlobalScale(mainCsd);
 
             // 保存合并后的 csd 文件
             mainCsd.Save(outputPath);
@@ -72,10 +93,6 @@ namespace CsdMergeTool
         // 解析主 csd 文件
         private void ParseMainCsd(XmlDocument mainCsd)
         {
-            String contentPath = "GameProjectFile/Content/Content";
-            String bodyRootPath = contentPath + "/ObjectData";
-            String animationRootPath = contentPath + "/Animation";
-
             Dictionary<String, ActionInfo> tag2ActionInfo = new Dictionary<string, ActionInfo>();
 
             // 遍历 body 根节点下的所有部位，如眼睛、嘴巴、武器等等
@@ -212,35 +229,93 @@ namespace CsdMergeTool
             }
         }
 
+        // 应用全局缩放
+        private void ApplyGlobalScale(XmlDocument mainCsd)
+        {
+            XmlNode rootNode = mainCsd.SelectSingleNode(bodyRootPath);
+
+            // Step1: 缩放模型
+
+            // 缩放根节点位置
+            ApplyScale(rootNode, "Position", globalScale);
+
+            foreach (XmlNode partNode in rootNode.SelectSingleNode("Children"))
+            {
+                // 缩放部位节点位置
+                ApplyScale(partNode, "Position", globalScale);
+
+                if (partNode.SelectSingleNode("Children") == null)
+                    continue;
+
+                foreach (XmlNode spriteNode in partNode.SelectSingleNode("Children"))
+                {
+                    // 缩放精灵节点位置
+                    ApplyScale(spriteNode, "Position", globalScale);
+
+                    // 缩放精灵节点大小
+                    ApplyScale(spriteNode, "Size", globalScale);
+                }
+            }
+
+            // Step2: 缩放动画
+            XmlNode animationNode = mainCsd.SelectSingleNode(animationRootPath);
+            foreach (XmlNode timelineNode in animationNode)
+            {
+                String frameType = GetAttribute(timelineNode, "FrameType");
+                if (!frameType.Equals("PositionFrame"))
+                    continue;
+
+                ApplyScale(timelineNode, "PointFrame", globalScale);
+            }
+        }
+
+        // 设置节点属性
         private void SetAttribute(XmlNode node, String name, String value)
         {
             XmlElement element = (XmlElement)node;
             element.SetAttribute(name, value);
         }
 
+        // 获取节点属性
         private String GetAttribute(XmlNode node, String name)
         {
             XmlElement element = (XmlElement)node;
             return element.GetAttribute(name);
         }
 
+        // 设置子节点属性
         private void SetChildAttribute(XmlNode node, String childName, String name, String value)
         {
             XmlNode childNode = node.SelectSingleNode(childName);
             SetAttribute(childNode, name, value);
         }
 
+        // 获取子节点属性
         private String GetChildAttribute(XmlNode node, String childName, String name)
         {
             XmlNode childNode = node.SelectSingleNode(childName);
             return GetAttribute(childNode, name);
         }
 
+        // 添加子节点
         private void AddChildNode(XmlDocument doc, XmlNode node, String childName)
         {
             XmlElement element = (XmlElement)node;
             XmlElement childElement = doc.CreateElement(childName);
             element.AppendChild(childElement);
+        }
+
+        // 子节点应用缩放
+        private void ApplyScale(XmlNode node, string childName, float scale)
+        {
+            float x = Convert.ToSingle(GetChildAttribute(node, childName, "X"));
+            float y = Convert.ToSingle(GetChildAttribute(node, childName, "Y"));
+
+            float scaledX = x * scale;
+            float scaledY = y * scale;
+
+            SetChildAttribute(node, childName, "X", scaledX.ToString());
+            SetChildAttribute(node, childName, "Y", scaledY.ToString());
         }
     }
 }
