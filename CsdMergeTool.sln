@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsdMergeTool", "CSDConverter\CsdMergeTool.csproj", "{A72C15F8-C004-4C84-B5BB-89C62A41008B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsdMergeTool", "CsdMergeTool\CsdMergeTool.csproj", "{A72C15F8-C004-4C84-B5BB-89C62A41008B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

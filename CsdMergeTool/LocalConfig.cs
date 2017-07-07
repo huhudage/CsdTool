@@ -85,13 +85,17 @@ public class LocalConfig
 
     private static String EnsureLocalConfig()
     {
-        String appDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CSDConverter");
+        String appDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CsdMergeTool");
         if (!Directory.Exists(appDir))
             Directory.CreateDirectory(appDir);
 
         String configPath = Path.Combine(appDir, configFileName);
         if (!File.Exists(configPath))
-            File.Create(configPath);
+        {
+            FileStream fs = File.Create(configPath);
+            fs.Close();
+            fs.Dispose();
+        }
 
         return configPath;
     }
